@@ -36,6 +36,12 @@ namespace custom {
         ~unique_ptr() {
             reset () ;
         }
+        //Explicitly prohibit copy semantics (Rule of five)
+        unique_ptr(const unique_ptr&) = delete;
+        unique_ptr& operator = (const unique_ptr&) = delete;
+
+        //implement move semantics
+        
     }
 
 }
