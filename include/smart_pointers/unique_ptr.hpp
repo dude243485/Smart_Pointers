@@ -21,5 +21,21 @@ namespace custom {
         }
     };
 
-    
+    //main unique_ptr class
+    template <typename T, typename Deleter = default_delete<T>>
+    class unique_ptr{
+        private: 
+        T* m_ptr;
+        Deleter m_deleter;
+
+        public:
+        //constructor
+        explicit unique_ptr(T* p =nullptr, Deleter d = Deleter())
+            : m_ptr(p), m_deleter(std::move(d)) {}
+
+        ~unique_ptr() {
+            reset () ;
+        }
+    }
+
 }
