@@ -41,7 +41,21 @@ namespace custom {
         unique_ptr& operator = (const unique_ptr&) = delete;
 
         //implement move semantics
+        unique_ptr(unique_ptr && other) noexcept
+            : m_ptr(other.m_ptr), m_deleter(std::move(other.m_deleter)) {
+                other.m_ptr = nullptr;
+            }
         
+        unique_ptr& operator = (unique_ptr && other) noexcept {
+            if (this != &other) {
+                reset();
+                m_ptr = other.m_ptr;
+                m_deleter = std::move(other.m_deleter);
+                other.m_ptr = nullptr;
+            }
+            return *this;
+        }
+
     }
 
 }
