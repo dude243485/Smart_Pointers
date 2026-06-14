@@ -14,5 +14,12 @@ namespace custom {
     };
 
     //default deleter specialization for arrays
+    template <typename T>
+    struct default_delete<T[]> {
+        void operator()(T* ptr) const {
+            delete[] ptr;
+        }
+    };
+
     
 }
